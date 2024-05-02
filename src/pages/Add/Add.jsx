@@ -49,7 +49,7 @@ const Add = () => {
     <div className="add">
       <form className="flex-col" onSubmit={onSubmitHandler}>
         <div className="add-img-upload flex-col">
-          <p>Upload Image</p>
+          <p>Tải ảnh sản phẩm</p>
           <label htmlFor="image">
             <img
               src={image ? URL.createObjectURL(image) : assets.upload_area}
@@ -65,7 +65,7 @@ const Add = () => {
           />
         </div>
         <div className="add-product-name flex-col">
-          <p>Product name</p>
+          <p>Tên sản phẩm</p>
           <input
             onChange={onChangeHandler}
             value={data.name}
@@ -75,19 +75,19 @@ const Add = () => {
           />
         </div>
         <div className="add-product-description flex-col">
-          <p>Product descripton</p>
+          <p>Thông tin sản phẩm</p>
           <textarea
             onChange={onChangeHandler}
             value={data.description}
             name="description"
             rows="6"
-            placeholder="write content here"
+            placeholder="Viết nội dung ở đây"
             required
           ></textarea>
         </div>
         <div className="add-category-price">
           <div className="add-category flex-col">
-            <p>Product category</p>
+            <p>Danh mục</p>
             <select onChange={onChangeHandler} name="category">
               <option value="Milk Tea">Milk Tea</option>
               <option value="Fruits Tea">Fruits Tea</option>
@@ -100,7 +100,7 @@ const Add = () => {
             </select>
           </div>
           <div className="add-price flex-col">
-            <p>Product price</p>
+            <p>Giá</p>
             <input
               onChange={onChangeHandler}
               value={data.price}
@@ -111,7 +111,7 @@ const Add = () => {
           </div>
         </div>
         <button type="submit" className="add-btn">
-          ADD
+          Thêm
         </button>
       </form>
     </div>
