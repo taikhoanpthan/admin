@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import "./Add.css";
 import { assets } from "../../assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
+
 const Add = () => {
-  const url = "https://be-food-ngv7.onrender.com/";
-  const [image, setImage] = useState(false);
+  const url = "https://be-food-ngv7.onrender.com";
+  const [image, setImage] = useState(null);
 
   const [data, setData] = useState({
     name: "",
@@ -15,10 +16,10 @@ const Add = () => {
   });
 
   const onChangeHandler = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setData((data) => ({ ...data, [name]: value }));
+    const { name, value } = event.target;
+    setData((prevData) => ({ ...prevData, [name]: value }));
   };
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     const formData = new FormData();
@@ -27,24 +28,35 @@ const Add = () => {
     formData.append("price", Number(data.price));
     formData.append("category", data.category);
     formData.append("image", image);
-    const respone = await axios.post(`${url}/api/food/add`, formData);
-    if (respone.data.success) {
-      setData({
-        name: "",
-        description: "",
-        price: "",
-        category: "Milk Tea",
+
+    try {
+      const response = await axios.post(`${url}/api/food/add`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
-      setImage(false);
-      toast.success(respone.data.message);
-    } else {
-      toast.error(respone.data.message);
+      if (response.data.success) {
+        setData({
+          name: "",
+          description: "",
+          price: "",
+          category: "Milk Tea",
+        });
+        setImage(null);
+        toast.success(response.data.message);
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error("Đã xảy ra lỗi, vui lòng thử lại sau.");
+      console.error("There was an error!", error);
     }
   };
 
   useEffect(() => {
     console.log(data);
   }, [data]);
+
   return (
     <div className="add">
       <form className="flex-col" onSubmit={onSubmitHandler}>
@@ -53,7 +65,7 @@ const Add = () => {
           <label htmlFor="image">
             <img
               src={image ? URL.createObjectURL(image) : assets.upload_area}
-              alt=""
+              alt="Upload Preview"
             />
           </label>
           <input
@@ -72,6 +84,7 @@ const Add = () => {
             type="text"
             name="name"
             placeholder="Type here"
+            required
           />
         </div>
         <div className="add-product-description flex-col">
@@ -88,7 +101,11 @@ const Add = () => {
         <div className="add-category-price">
           <div className="add-category flex-col">
             <p>Danh mục</p>
-            <select onChange={onChangeHandler} name="category">
+            <select
+              onChange={onChangeHandler}
+              name="category"
+              value={data.category}
+            >
               <option value="Milk Tea">Milk Tea</option>
               <option value="Fruits Tea">Fruits Tea</option>
               <option value="Coffee">Coffee</option>
@@ -107,6 +124,7 @@ const Add = () => {
               type="number"
               name="price"
               placeholder="10.000Đ"
+              required
             />
           </div>
         </div>
