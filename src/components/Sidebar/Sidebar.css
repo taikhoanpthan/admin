@@ -27,3 +27,18 @@
     background-color: #fff0ed;
     border-color: rgb(113, 88, 77);
 }
+/* Đảm bảo thanh bên có chiều rộng 100% trên điện thoại */
+.sidebar {
+    width: 100%;
+}
+
+/* Thêm các đối tượng tùy chỉnh để điều chỉnh giao diện cho điện thoại */
+@media screen and (max-width: 600px) {
+    .sidebar-options {
+        padding-left: 10%;
+    }
+
+    .sidebar-option {
+        padding: 8px;
+    }
+}

@@ -3,7 +3,7 @@ import "./List.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 const List = () => {
-  const url = "http://localhost:4000";
+  const url = "https://be-food-ngv7.onrender.com/";
   const [list, setList] = useState([]);
   const fetchList = async () => {
     const respone = await axios.get(`${url}/api/food/list`);
@@ -14,14 +14,14 @@ const List = () => {
     }
   };
   const removeFood = async (foodId) => {
-    const respone = await axios.post(`${url}/api/food/remove`,{id:foodId})
+    const respone = await axios.post(`${url}/api/food/remove`, { id: foodId });
     await fetchList();
     if (respone.data.success) {
       toast.success(respone.data.message);
     } else {
       toast.error(respone.data.message);
     }
-}
+  };
   useEffect(() => {
     fetchList();
   }, []);
@@ -43,7 +43,9 @@ const List = () => {
               <p>{item.name}</p>
               <p>{item.category}</p>
               <p>{item.price}đ</p>
-              <p onClick={()=>removeFood(item._id)} className="cursor">X</p>
+              <p onClick={() => removeFood(item._id)} className="cursor">
+                X
+              </p>
             </div>
           );
         })}
