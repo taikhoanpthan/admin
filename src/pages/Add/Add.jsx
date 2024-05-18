@@ -1,11 +1,11 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./Add.css";
 import { assets } from "../../assets/assets";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const Add = () => {
-  const url = "https://be-food-ngv7.onrender.com";
+  const url = "https://be-food-0ell.onrender.com/";
   const [image, setImage] = useState(null);
 
   const [data, setData] = useState({
