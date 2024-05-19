@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const List = () => {
-  const url = "https://be-food-f10o.onrender.com/"; // Sửa URL backend ở đây
+  const url = "http://localhost:4000/"; // Sửa URL backend ở đây
   const [list, setList] = useState([]);
 
   const fetchList = async () => {

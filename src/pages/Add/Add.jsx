@@ -5,7 +5,7 @@ import "./Add.css";
 import { assets } from "../../assets/assets";
 
 const Add = () => {
-  const url = "https://be-food-f10o.onrender.com/";
+  const url = "http://localhost:4000/";
   const [image, setImage] = useState(null);
 
   const [data, setData] = useState({
