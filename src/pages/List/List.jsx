@@ -4,12 +4,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const List = () => {
-  const url = "https://be-food-vtbl.onrender.com/"; // Sửa URL backend ở đây
+  const url = "https://be-food-vtbl.onrender.com"; // Ensure this URL is correct
   const [list, setList] = useState([]);
 
   const fetchList = async () => {
     try {
       const response = await axios.get(`${url}/api/food/list`);
+      console.log("Fetch List Response:", response); // Log response for debugging
       if (response.data.success) {
         setList(response.data.data);
       } else {
@@ -26,6 +27,7 @@ const List = () => {
       const response = await axios.post(`${url}/api/food/remove`, {
         id: foodId,
       });
+      console.log("Remove Food Response:", response); // Log response for debugging
       if (response.data.success) {
         toast.success(response.data.message);
         fetchList(); // Fetch the list again after a successful removal
