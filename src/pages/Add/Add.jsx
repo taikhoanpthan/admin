@@ -5,7 +5,7 @@ import "./Add.css";
 import { assets } from "../../assets/assets";
 
 const Add = () => {
-  const url = "https://be-food-vtbl.onrender.com/";
+  const url = "https://be-food-vtbl.onrender.com";
   const [image, setImage] = useState(null);
 
   const [data, setData] = useState({
@@ -40,6 +40,8 @@ const Add = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
+      console.log("Submit Response:", response); // Log phản hồi để gỡ lỗi
+
       if (response.data && response.data.success) {
         clearForm();
         toast.success(response.data.message);
@@ -62,6 +64,15 @@ const Add = () => {
     setImage(null);
   };
 
+  const onImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file && (file.type === "image/jpeg" || file.type === "image/png")) {
+      setImage(file);
+    } else {
+      toast.error("Invalid image format. Please upload a JPG or PNG file.");
+    }
+  };
+
   return (
     <div className="add">
       <form className="flex-col" onSubmit={onSubmitHandler}>
@@ -71,7 +82,7 @@ const Add = () => {
             <img src={image ? URL.createObjectURL(image) : assets.upload_area} alt="Upload Preview" />
           </label>
           <input
-            onChange={(e) => setImage(e.target.files[0])}
+            onChange={onImageChange}
             type="file"
             id="image"
             hidden
