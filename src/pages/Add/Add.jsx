@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "./Add.css";
 import { assets } from "../../assets/assets";
 
 const Add = () => {
-  const url = "https://be-food-vtbl.onrender.com";
+  const url = "http://localhost:4000";
   const [image, setImage] = useState(null);
 
   const [data, setData] = useState({
@@ -40,13 +40,15 @@ const Add = () => {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log("Submit Response:", response); // Log phản hồi để gỡ lỗi
+      console.log("Submit Response:", response);
 
       if (response.data && response.data.success) {
         clearForm();
         toast.success(response.data.message);
       } else {
-        toast.error(response.data ? response.data.message : "Unknown error occurred");
+        toast.error(
+          response.data ? response.data.message : "Unknown error occurred"
+        );
       }
     } catch (error) {
       toast.error("An error occurred. Please try again later.");
@@ -75,11 +77,14 @@ const Add = () => {
 
   return (
     <div className="add">
-      <form className="flex-col" onSubmit={onSubmitHandler}>
-        <div className="add-img-upload flex-col">
+      <form className="form" onSubmit={onSubmitHandler}>
+        <div className="form-group">
           <p>Upload Product Image</p>
-          <label htmlFor="image">
-            <img src={image ? URL.createObjectURL(image) : assets.upload_area} alt="Upload Preview" />
+          <label htmlFor="image" className="image-label">
+            <img
+              src={image ? URL.createObjectURL(image) : assets.upload_area}
+              alt="Upload Preview"
+            />
           </label>
           <input
             onChange={onImageChange}
@@ -89,7 +94,7 @@ const Add = () => {
             required
           />
         </div>
-        <div className="add-product-name flex-col">
+        <div className="form-group">
           <p>Product Name</p>
           <input
             onChange={onChangeHandler}
@@ -100,7 +105,7 @@ const Add = () => {
             required
           />
         </div>
-        <div className="add-product-description flex-col">
+        <div className="form-group">
           <p>Product Description</p>
           <textarea
             onChange={onChangeHandler}
@@ -111,8 +116,8 @@ const Add = () => {
             required
           ></textarea>
         </div>
-        <div className="add-category-price">
-          <div className="add-category flex-col">
+        <div className="form-group-inline">
+          <div className="form-group">
             <p>Category</p>
             <select
               onChange={onChangeHandler}
@@ -129,7 +134,7 @@ const Add = () => {
               <option value="Noodles">Noodles</option>
             </select>
           </div>
-          <div className="add-price flex-col">
+          <div className="form-group">
             <p>Price</p>
             <input
               onChange={onChangeHandler}
@@ -141,7 +146,7 @@ const Add = () => {
             />
           </div>
         </div>
-        <button type="submit" className="add-btn">
+        <button type="submit" className="submit-btn">
           Add
         </button>
       </form>

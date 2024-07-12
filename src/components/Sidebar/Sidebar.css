@@ -1,46 +1,90 @@
 .sidebar {
-    width: 18%;
+    width: 250px;
     min-height: 100vh;
-    border: 1.5px solid #a9a9a9;
-    border-top: 0;
-    font-size: max(1vw, 10px);
-}
-
-.sidebar-options {
-    padding-top: 50px;
-    padding-left: 20%;
+    background-color: #ef844f;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-}
-
-.sidebar-option {
+    align-items: center;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sidebar-logo img {
+    width: 120px;
+    margin-bottom: 40px;
+  
+  }
+  
+  .sidebar-options {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .sidebar-option {
     display: flex;
     align-items: center;
-    gap: 12px;
-    border: 1px solid #a9a9a9;
-    border-right: 0;
-    padding: 8px 10px;
-    border-radius: 3px 0px 0px 3px;
-    cursor: pointer;
-}
-
-.sidebar-option.active {
-    background-color: #fff0ed;
-    border-color: rgb(113, 88, 77);
-}
-
-/* Đảm bảo thanh bên có chiều rộng 100% trên điện thoại */
-@media screen and (max-width: 600px) {
+    gap: 20px;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar-option img {
+    width: 24px;
+    height: 24px;
+    color: #dad2d2;
+  }
+  
+  .sidebar-option span {
+    font-size: 16px;
+  }
+  
+  .sidebar-option:hover {
+    background-color: #343a40;
+  }
+  
+  .sidebar-option.active {
+    background-color: #eb5a11;
+    color: #ffffff;
+  }
+  
+  /* Responsive design for mobile devices */
+  @media screen and (max-width: 600px) {
     .sidebar {
-        width: 100%;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      flex-direction: row;
+      padding: 10px 0;
+      justify-content: space-around;
+      box-shadow: none;
     }
-
+  
+    .sidebar-logo {
+      display: none;
+    }
+  
     .sidebar-options {
-        padding-left: 10%;
+      flex-direction: row;
+      gap: 10px;
     }
-
+  
     .sidebar-option {
-        padding: 8px;
+      padding: 10px 8px;
+      justify-content: center;
     }
-}
+  
+    .sidebar-option span {
+      display: none;
+    }
+  
+    .sidebar-option img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
